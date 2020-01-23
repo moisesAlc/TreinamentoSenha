@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Treinador de Senha Pedagógico - Moisés</title>
+
+    <!-- <link rel="stylesheet" src="bootstrap.css"></link> -->
+    <style>
+        #app{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        button{
+            background-color: white;
+            border: black;
+            text-decoration: none;
+        }
+
+        button::-moz-focus-inner {
+        border: 0;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+
+    </style>
+
+    <script src="vue.js"></script>
+    <script src="js.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h3>Senha Tipo Externo</h3>
+        <span>{{minutos}}:{{segundos}}</span>
+            <transition name="fade">
+                <span>{{mensagem}}</span>
+            </transition>
+        <input v-model="senhaInput" v-on:keyup.enter="verifica"><label id="resultado"></label>
+        <button v-on:click="geraTempo">Iniciar</button>
+        <p>Pontuação: {{pontos}}</p>
+        
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                mensagem: 'Aguardando...Clique em iniciar',
+                minutos: '',
+                segundos: '',
+                senha: '',
+                senhaInput: '',
+                pontos: 0
+            },
+            methods: {
+
+                geraTempo: function (message, event) {
+
+                    retorno = geraTempoAleatorio();
+
+                    this.minutos = retorno[0];
+                    this.segundos = retorno[1];
+                    this.senha = retorno[2];
+                    this.mensagem = 'Digite a senha: ';
+                    this.senhaInput = '';
+
+                    //alert(retorno[2]); // verifica senha
+
+                },
+                verifica: function(message, event){
+                    if (this.senhaInput == this.senha){
+                        this.pontos++;
+                        this.geraTempo();
+                    }else{
+                        this.pontos--;
+                        this.geraTempo();
+                    }
+                }
+            }
+        });
+
+        function pad(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+
+        geraTempoAleatorio = function(){
+            var minutoGerado = Math.trunc(Math.random()*24);
+            var segundoGerado = Math.trunc(Math.random()*59);
+            var minuto = pad(minutoGerado,2);
+            var segundo = pad(segundoGerado,2);
+            var digitoMinuto = minuto[1];
+            var digitoSegundo = segundo[0];
+            var senha = new Number((new Number(digitoMinuto)*5).toString()) + 
+                        new Number((new Number(digitoSegundo)+1).toString());
+            senha = senha.toString() + 159;
+            var momento = [minuto, segundo, senha];
+            return momento;
+        }
+
+
+    </script>
+</body>
+</html>
