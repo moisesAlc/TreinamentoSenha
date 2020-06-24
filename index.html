@@ -5,60 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Treinador de Senha Pedagógico - Moisés</title>
-
-    <!-- <link rel="stylesheet" src="bootstrap.css"></link> -->
+    <link rel="stylesheet" src="style.css">
     <style>
-        #app{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        button{
-            background-color: white;
-            border: black;
-            text-decoration: none;
-        }
+        @media only screen and (max-width: 600px) {    
+            #app{
+                display: flex;
+                flex-direction: column;
+                margin: auto;
+                width: 80vw;
+                text-align: center;
+                margin: 16px;
+                color: #444;
+            }
+            #idMensagem{
+                color: darkgrey;
+            }
+            #divPontos{
+                display: flex;
+                flex-direction: row;
+                text-align: center;
+                justify-content: space-around;
+                font-weight: lighter;
+            }
+            button{
+                /*background-color: white;*/
+                border: black;
+                text-decoration: none;
+            }
 
-        button::-moz-focus-inner {
-        border: 0;
-        }
+            button::-moz-focus-inner {
+            border: 0;
+            }
 
-        .fade-enter-active, .fade-leave-active {
-            transition: opacity .5s;
+            .fade-enter-active, .fade-leave-active {
+                transition: opacity .5s;
+            }
+            .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                opacity: 0;
+            }
         }
-        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-            opacity: 0;
-        }
-
     </style>
-
     <script src="vue.js"></script>
     <script src="js.js"></script>
 </head>
 <body>
 
     <div id="app">
-        <h3>Senha Tipo Externo</h3>
-        <span>{{minutos}}:{{segundos}}</span>
+        <h3>Treinador da Senha para Novos Educadores</h3>
+        <p>
             <transition name="fade">
-                <span>{{mensagem}}</span>
-            </transition>
-        <input v-model="senhaInput" v-on:keyup.enter="verifica"><label id="resultado"></label>
-        <button v-on:click="geraTempo">Iniciar</button>
-        <p>Pontuação: {{pontos}}</p>
+                <span id="idMensagem">{{mensagem}}</span>
+            </transition><br>
+        </p>
+        <div id="divSenhas">
+            <input v-model="codigoSenha" v-on:change="geraTempo" placeholder="código da senha"><br>
+            <span>{{minutos}}{{segundos}}</span><br>
+            <input v-model="senhaInput" v-on:keyup.enter="verifica" placeholder="senha"><label id="resultado"></label>
+        </div>
         
+        <p>{{pontos}} pontos</p>
+        <div id="divPontos">
+            <p>{{erros}} erros</p>
+            <p>{{acertos}} acertos</p>
+        </div>
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                mensagem: 'Aguardando...Clique em iniciar',
+                mensagem: 'Coloque o Código da Senha e aperte Enter ou TAB',
                 minutos: '',
                 segundos: '',
                 senha: '',
                 senhaInput: '',
-                pontos: 0
+                codigoSenha: '',
+                pontos: 0,
+                acertos: 0,
+                erros: 0
             },
             methods: {
 
@@ -66,10 +90,10 @@
 
                     retorno = geraTempoAleatorio();
 
-                    this.minutos = retorno[0];
+                    this.minutos = retorno[0]+":";
                     this.segundos = retorno[1];
                     this.senha = retorno[2];
-                    this.mensagem = 'Digite a senha: ';
+                    this.mensagem = '';
                     this.senhaInput = '';
 
                     //alert(retorno[2]); // verifica senha
@@ -78,9 +102,11 @@
                 verifica: function(message, event){
                     if (this.senhaInput == this.senha){
                         this.pontos++;
+                        this.acertos++;
                         this.geraTempo();
                     }else{
                         this.pontos--;
+                        this.erros++;
                         this.geraTempo();
                     }
                 }
@@ -102,7 +128,7 @@
             var digitoSegundo = segundo[0];
             var senha = new Number((new Number(digitoMinuto)*5).toString()) + 
                         new Number((new Number(digitoSegundo)+1).toString());
-            senha = senha.toString() + 159;
+            senha = senha.toString() + app.codigoSenha.toString();
             var momento = [minuto, segundo, senha];
             return momento;
         }
