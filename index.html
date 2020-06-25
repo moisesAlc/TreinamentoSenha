@@ -20,9 +20,9 @@
             </transition><br>
         </p>
         <div id="divSenhas">
-            <input v-model="codigoSenha" type="number" v-on:change="geraTempo" placeholder="código da senha" size="17"><br>
+            <input v-model="codigoSenha" type="number" v-on:change="geraTempo" placeholder="código da senha"><br>
             <span>{{minutos}}{{segundos}}</span><br>
-            <input v-model="senhaInput" type="number" v-on:keyup.enter="verifica" placeholder="senha" size="17"><label id="resultado"></label>
+            <input v-model="senhaInput" type="number" v-on:keyup.enter="verifica" placeholder="senha"><label id="resultado"></label>
             <!--<div id="teclado">
                 <p>8</p>
                 <p>{{acertos}} acertos</p>
