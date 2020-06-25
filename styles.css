@@ -1,0 +1,41 @@
+ 
+    #app{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 80vw;
+        text-align: center;
+        color: #444;
+    }
+    #idMensagem{
+        color: darkgrey;
+    }
+    #divPontos{
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        justify-content: space-around;
+        font-weight: lighter;
+    }
+    ::-webkit-input-placeholder {
+        text-align: center;
+     }
+     
+     :-moz-placeholder { /* Firefox 18- */
+        text-align: center;  
+     }
+     
+     ::-moz-placeholder {  /* Firefox 19+ */
+        text-align: center;  
+     }
+     
+     :-ms-input-placeholder {  
+        text-align: center; 
+     }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
