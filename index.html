@@ -5,46 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Treinador de Senha Pedagógico - Moisés</title>
-    <link rel="stylesheet" src="style.css">
-    <style>
-        @media only screen and (max-width: 600px) {    
-            #app{
-                display: flex;
-                flex-direction: column;
-                margin: auto;
-                width: 80vw;
-                text-align: center;
-                margin: 16px;
-                color: #444;
-            }
-            #idMensagem{
-                color: darkgrey;
-            }
-            #divPontos{
-                display: flex;
-                flex-direction: row;
-                text-align: center;
-                justify-content: space-around;
-                font-weight: lighter;
-            }
-            button{
-                /*background-color: white;*/
-                border: black;
-                text-decoration: none;
-            }
-
-            button::-moz-focus-inner {
-            border: 0;
-            }
-
-            .fade-enter-active, .fade-leave-active {
-                transition: opacity .5s;
-            }
-            .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-                opacity: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <script src="vue.js"></script>
     <script src="js.js"></script>
 </head>
@@ -58,9 +19,14 @@
             </transition><br>
         </p>
         <div id="divSenhas">
-            <input v-model="codigoSenha" v-on:change="geraTempo" placeholder="código da senha"><br>
+            <input v-model="codigoSenha" v-on:change="geraTempo" placeholder="código da senha" size="17"><br>
             <span>{{minutos}}{{segundos}}</span><br>
-            <input v-model="senhaInput" v-on:keyup.enter="verifica" placeholder="senha"><label id="resultado"></label>
+            <input v-model="senhaInput" type="number" v-on:keyup.enter="verifica" placeholder="senha" size="17"><label id="resultado"></label>
+            <!--<div id="teclado">
+                <p>8</p>
+                <p>{{acertos}} acertos</p>
+                <p>{{acertos}} acertos</p>
+            </div>-->
         </div>
         
         <p>{{pontos}} pontos</p>
@@ -74,7 +40,7 @@
         var app = new Vue({
             el: '#app',
             data: {
-                mensagem: 'Coloque o Código da Senha e aperte Enter ou TAB',
+                mensagem: 'Insira o código da senha e aperte TAB',
                 minutos: '',
                 segundos: '',
                 senha: '',
@@ -87,7 +53,6 @@
             methods: {
 
                 geraTempo: function (message, event) {
-
                     retorno = geraTempoAleatorio();
 
                     this.minutos = retorno[0]+":";
