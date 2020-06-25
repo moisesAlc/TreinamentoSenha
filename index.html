@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Treinador de Senha Pedagógico - Moisés</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="styles.css">
     <script src="vue.js"></script>
     <script src="js.js"></script>
@@ -13,15 +13,15 @@
 <body>
 
     <div id="app">
-        <h3>Treinador da Senha para Novos Educadores</h3>
+        <h3 id="titulo">Treinador da Senha para Novos Educadores</h3>
         <p>
             <transition name="fade">
                 <span id="idMensagem">{{mensagem}}</span>
-            </transition><br>
+            </transition>
         </p>
         <div id="divSenhas">
-            <input v-model="codigoSenha" type="number" v-on:change="geraTempo" placeholder="código da senha"><br>
-            <span>{{minutos}}{{segundos}}</span><br>
+            <input v-model="codigoSenha" type="number" v-on:change="geraTempo" placeholder="código da senha">
+            <h5 id="mostra-tempo">{{minutos}}{{segundos}}</h5>
             <input v-model="senhaInput" type="number" v-on:keyup.enter="verifica" placeholder="senha"><label id="resultado"></label>
             <!--<div id="teclado">
                 <p>8</p>

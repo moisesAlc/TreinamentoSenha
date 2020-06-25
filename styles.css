@@ -1,4 +1,7 @@
- 
+    body{
+        background-color: rgba(216, 0, 43, 0.664);
+    }
+
     #app{
         display: flex;
         flex-direction: column;
@@ -6,16 +9,17 @@
         width: 80vw;
         text-align: center;
         color: #444;
+        color: white;
     }
     #titulo{
+        margin-top: 2vh;
         margin-bottom: 0;
     }
     #idMensagem{
-        color: darkgrey;
+        
     }
     #mostraTempo {
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0 !important;
     }
     #divPontos{
         display: flex;
