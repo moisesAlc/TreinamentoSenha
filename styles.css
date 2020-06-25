@@ -7,8 +7,15 @@
         text-align: center;
         color: #444;
     }
+    #titulo{
+        margin-bottom: 0;
+    }
     #idMensagem{
         color: darkgrey;
+    }
+    #mostraTempo {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     #divPontos{
         display: flex;
